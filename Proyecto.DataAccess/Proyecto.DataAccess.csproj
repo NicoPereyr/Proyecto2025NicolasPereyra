@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Proyecto.Abstractions\Proyecto.Abstractions.csproj" />
+    <ProjectReference Include="..\Proyecto.Entities\Proyecto.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
