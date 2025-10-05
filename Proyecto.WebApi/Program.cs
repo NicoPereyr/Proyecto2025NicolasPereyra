@@ -25,7 +25,6 @@ namespace Proyecto.WebApi
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
