@@ -28,8 +28,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Proyecto.Abstractions\Proyecto.Abstractions.csproj" />
+    <ProjectReference Include="..\Proyecto.Aplication\Proyecto.Aplication.csproj" />
     <ProjectReference Include="..\Proyecto.DataAccess\Proyecto.DataAccess.csproj" />
     <ProjectReference Include="..\Proyecto.Entities\Proyecto.Entities.csproj" />
+    <ProjectReference Include="..\Proyecto.Repository\Proyecto.Repository.csproj" />
     <ProjectReference Include="..\Proyecto.Services\Proyecto.Services.csproj" />
   </ItemGroup>
 
