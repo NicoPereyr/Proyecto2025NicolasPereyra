@@ -6,8 +6,8 @@ namespace Proyecto.DataAccess
 {
     public class DbDataAccess : IdentityDbContext
     {
-        public virtual DbSet<Brand> Brands { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Marca> Brands { get; set; }
+        public virtual DbSet<Categoria> Categories { get; set; }
         public virtual DbSet<Deposit> Deposits { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }

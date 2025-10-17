@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto.Entities
 {
-    public class Category : IEntidad
+    public class Categoria : IEntidad
     {
         public int Id { get; set; }
         [StringLength(50)]
@@ -11,7 +11,7 @@ namespace Proyecto.Entities
 
         public virtual ICollection<Product> Productos { get; set; }
 
-        public Category()
+        public Categoria()
         {
             Productos = new HashSet<Product>();
         }

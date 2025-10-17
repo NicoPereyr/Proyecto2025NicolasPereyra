@@ -12,10 +12,10 @@ namespace Proyecto.Entities
         public string Codigo { get; set; }
 
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        public virtual Categoria Category { get; set; }
 
         public int MarcaId { get; set; }
-        public virtual Brand Marca { get; set; }
+        public virtual Marca Marca { get; set; }
 
         public decimal PrecioCosto { get; set; }
         public decimal PrecioVenta { get; set; }
