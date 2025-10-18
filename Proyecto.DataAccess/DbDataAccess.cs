@@ -8,8 +8,8 @@ namespace Proyecto.DataAccess
     {
         public virtual DbSet<Marca> Brands { get; set; }
         public virtual DbSet<Categoria> Categories { get; set; }
-        public virtual DbSet<Deposit> Deposits { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Deposito> Deposits { get; set; }
+        public virtual DbSet<Producto> Products { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
         public DbDataAccess(DbContextOptions<DbDataAccess> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.LogTo(Console.WriteLine).EnableDetailedErrors();

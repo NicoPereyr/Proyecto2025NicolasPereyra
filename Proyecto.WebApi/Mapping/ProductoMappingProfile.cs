@@ -8,8 +8,8 @@ namespace Proyecto.WebApi.Mapping
     {
         public ProductoMappingProfile()
         {
-            CreateMap<Product, ProductoResponseDto>();
-            CreateMap<ProductoRequestDto, Product>();
+            CreateMap<Producto, ProductoResponseDto>();
+            CreateMap<ProductoRequestDto, Producto>();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto.Entities
 {
-    public class Product : IEntidad
+    public class Producto : IEntidad
     {
         public int Id { get; set; }
         [StringLength(100)]
@@ -24,7 +24,7 @@ namespace Proyecto.Entities
 
         public virtual ICollection<Stock> Stocks { get; set; }
 
-        public Product()
+        public Producto()
         {
             Stocks = new HashSet<Stock>();
             Activo = true;

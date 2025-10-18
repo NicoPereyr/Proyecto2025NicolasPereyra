@@ -9,8 +9,8 @@ namespace Proyecto.WebApi.Controllers
     public class ProductosController : ControllerBase
     {
         private readonly ILogger<ProductosController> _logger;
-        private readonly IApplication<Product> _producto;
-        public ProductosController(ILogger<ProductosController> logger, IApplication<Product> producto)
+        private readonly IApplication<Producto> _producto;
+        public ProductosController(ILogger<ProductosController> logger, IApplication<Producto> producto)
         {
             _logger = logger;
             _producto = producto;
@@ -31,7 +31,7 @@ namespace Proyecto.WebApi.Controllers
             {
                 return BadRequest();
             }
-            Product producto = _producto.GetById(Id.Value);
+            Producto producto = _producto.GetById(Id.Value);
             if (producto is null)
             {
                 return NotFound();
@@ -40,7 +40,7 @@ namespace Proyecto.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Crear(Product producto)
+        public async Task<IActionResult> Crear(Producto producto)
         {
             if (!ModelState.IsValid)
             { return BadRequest(); }
@@ -49,13 +49,13 @@ namespace Proyecto.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Editar(int? Id, Product producto)
+        public async Task<IActionResult> Editar(int? Id, Producto producto)
         {
             if (!Id.HasValue)
             { return BadRequest(); }
             if (!ModelState.IsValid)
             { return BadRequest(); }
-            Product productoBack = _producto.GetById(Id.Value);
+            Producto productoBack = _producto.GetById(Id.Value);
             if (productoBack is null)
             { return NotFound(); }
             productoBack.Nombre = producto.Nombre;
@@ -74,7 +74,7 @@ namespace Proyecto.WebApi.Controllers
             { return BadRequest(); }
             if (!ModelState.IsValid)
             { return BadRequest(); }
-            Product productoBack = _producto.GetById(Id.Value);
+            Producto productoBack = _producto.GetById(Id.Value);
             if (productoBack is null)
             { return NotFound(); }
             _producto.Delete(productoBack.Id);
