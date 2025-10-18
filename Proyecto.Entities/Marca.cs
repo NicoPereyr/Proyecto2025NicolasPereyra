@@ -9,11 +9,5 @@ namespace Proyecto.Entities
         [StringLength(50)]
         public string Nombre { get; set; }
 
-        public virtual ICollection<Product> Productos { get; set; }
-
-        public Marca()
-        {
-            Productos = new HashSet<Product>();
-        }
     }
 }

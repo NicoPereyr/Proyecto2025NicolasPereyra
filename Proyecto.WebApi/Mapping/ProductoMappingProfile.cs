@@ -1,15 +1,15 @@
-﻿using Proyecto.Aplication.Dtos.Producto;
+﻿using AutoMapper;
+using Proyecto.Aplication.Dtos.Producto;
 using Proyecto.Entities;
 
 namespace Proyecto.WebApi.Mapping
 {
-    public class ProductoMappingProfile
+    public class ProductoMappingProfile: Profile
     {
         public ProductoMappingProfile()
         {
-            //CreateMap<Product, ProductoResponseDto>().
-            //    ForMember(dest => dest.FechaNacimiento, ori => ori.MapFrom(src => src.FechaNacimiento.ToShortDateString()));
-            //CreateMap<ProductoRequestDto, Product>();
+            CreateMap<Product, ProductoResponseDto>();
+            CreateMap<ProductoRequestDto, Product>();
         }
     }
 }
