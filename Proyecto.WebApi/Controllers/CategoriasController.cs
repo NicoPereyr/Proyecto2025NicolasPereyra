@@ -12,6 +12,7 @@ namespace Proyecto.WebApi.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
+
     [ApiController]
     public class CategoriasController : ControllerBase
     {
@@ -33,7 +34,7 @@ namespace Proyecto.WebApi.Controllers
 
         [HttpGet]
         [Route("All")]
-
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> All()
         {
             var id = User.FindFirst("Id").Value.ToString();

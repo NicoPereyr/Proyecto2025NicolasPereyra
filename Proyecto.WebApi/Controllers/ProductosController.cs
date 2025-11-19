@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Proyecto.Aplication;
 using Proyecto.Entities;
 
@@ -18,6 +19,7 @@ namespace Proyecto.WebApi.Controllers
 
         [HttpGet]
         [Route("All")]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> All()
         {
             return Ok(_producto.GetAll());

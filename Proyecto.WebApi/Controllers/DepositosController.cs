@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto.Aplication;
 using Proyecto.Aplication.Dtos.Deposito;
@@ -25,6 +26,7 @@ namespace Proyecto.WebApi.Controllers
 
         [HttpGet]
         [Route("All")]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> All()
         {
             return Ok(_mapper.Map<IList<DepositoResponseDto>>(_deposito.GetAll()));

@@ -1,9 +1,14 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Proyecto.Abstractions;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Proyecto.Abstractions;
+using Proyecto.Services.AuthServices;
+using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Proyecto.Services.AuthServices
 {
@@ -22,17 +27,28 @@ namespace Proyecto.Services.AuthServices
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
+            var claims = new List<Claim>
+            {
+                new Claim("Id", parametros.Id),
+                new Claim(JwtRegisteredClaimNames.Sub, parametros.Id),
+                new Claim(JwtRegisteredClaimNames.Name, parametros.UserName),
+                new Claim(JwtRegisteredClaimNames.Email, parametros.Email)
+            };
+            if (parametros.Roles != null && parametros.Roles.Any())
+            {
+                foreach (var role in parametros.Roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
+            }
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim("Id", parametros.Id),
-                    new Claim(JwtRegisteredClaimNames.Sub, parametros.Id),
-                    new Claim(JwtRegisteredClaimNames.Name, parametros.UserName),
-                    new Claim(JwtRegisteredClaimNames.Email, parametros.Email)
-                }),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddHours(4),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha512Signature
+                )
             };
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
             var jwtToken = jwtTokenHandler.WriteToken(token);
