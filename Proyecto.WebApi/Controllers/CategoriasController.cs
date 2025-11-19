@@ -1,23 +1,31 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto.Aplication;
 using Proyecto.Aplication.Dtos.Categoria;
 using Proyecto.Entities;
+using Proyecto.Entities.MicrosoftIdentity;
 
 namespace Proyecto.WebApi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriasController : ControllerBase
     {
+        private readonly UserManager<User> _userManager;
         private readonly ILogger<CategoriasController> _logger;
         private readonly IApplication<Categoria> _categoria;
         private readonly IMapper _mapper;
         public CategoriasController(
+             UserManager<User> userManager,
             ILogger<CategoriasController> logger
             , IApplication<Categoria> categoria
             , IMapper mapper)
         {
+            _userManager = userManager;
             _logger = logger;
             _categoria = categoria;
             _mapper = mapper;
@@ -25,9 +33,18 @@ namespace Proyecto.WebApi.Controllers
 
         [HttpGet]
         [Route("All")]
+
         public async Task<IActionResult> All()
         {
-            return Ok(_mapper.Map<IList<CategoriaResponseDto>>(_categoria.GetAll()));
+            var id = User.FindFirst("Id").Value.ToString();
+            var user = _userManager.FindByIdAsync(id).Result;
+            if (_userManager.IsInRoleAsync(user, "Administrador").Result)
+            {
+                var name = User.FindFirst("name");
+                var a = User.Claims;
+                return Ok(_mapper.Map<IList<CategoriaResponseDto>>(_categoria.GetAll()));
+            }
+            return Unauthorized();
         }
 
         [HttpGet]
